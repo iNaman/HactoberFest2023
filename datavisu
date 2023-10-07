@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include "gnuplot-iostream.h"
+
+int main() {
+    Gnuplot gp;
+
+    std::vector<double> x, y;
+
+    for (double i = 0; i < 10; i += 0.1) {
+        x.push_back(i);
+        y.push_back(sin(i));
+    }
+
+    gp << "set title 'Sine Wave'\n";
+    gp << "set xlabel 'X-axis'\n";
+    gp << "set ylabel 'Y-axis'\n";
+    gp << "plot '-' with lines title 'Sine'\n";
+    gp.send1d(boost::make_tuple(x, y));
+
+    std::cout << "Press enter to exit..." << std::endl;
+    std::cin.get();
+    return 0;
+}
